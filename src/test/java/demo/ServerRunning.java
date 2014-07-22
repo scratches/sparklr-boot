@@ -1,13 +1,5 @@
 package demo;
 
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assume;
@@ -15,19 +7,18 @@ import org.junit.internal.AssumptionViolatedException;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
-import org.springframework.boot.test.RestTemplates;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.http.*;
 import org.springframework.security.oauth2.client.test.RestTemplateHolder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
+
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.util.*;
 
 /**
  * <p>
@@ -287,7 +278,7 @@ public class ServerRunning implements MethodRule, RestTemplateHolder {
 	}
 
 	public RestOperations createRestTemplate() {
-		RestTemplate client = RestTemplates.get();
+		RestTemplate client = new TestRestTemplate();
 		return client;
 	}
 
